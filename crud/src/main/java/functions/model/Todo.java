@@ -4,14 +4,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.google.cloud.firestore.annotation.Exclude;
+
 /** Represents a todo : id, text, author, creationDate, completed. */
 public class Todo {
 
+  @Exclude
   private String id;
+
   private String text;
+
   private String author;
+
   private Date creationDate;
+
   private Boolean completed;
+  
+  @Exclude
   private List<File> files;
 
   public Todo() {
