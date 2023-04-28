@@ -1,0 +1,9 @@
+<div *ngIf="dataLoaded">
+  <div class="center">
+    <button mat-fab color="primary" (click)="createNew()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <app-todo-item *ngFor="let item of data" [data]="item" (onDelete)="deleteTodo($event)" (onUploaded)="refreshin2Secs()"></app-todo-item>
+</div>
+<mat-progress-spinner *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-spinner>

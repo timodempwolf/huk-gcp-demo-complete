@@ -1,0 +1,44 @@
+<div class="todo-container">
+
+    <div class="card-container">
+        <div class="card-header">
+            <input type="text" class="author" type="text" [value]="data?.author" (input)="setAuthor($event)">
+            <div class="date">{{getCreationDate()}}</div>
+        </div>
+
+        <div class="card-body">
+            <textarea class="card-text" [value]="data?.text" (input)="setText($event)"></textarea>
+            <mat-divider class="divider" />
+            <div class="card-footer">
+                <div class="download-container">
+                    <button color="primary" mat-mini-fab class="button" (click)="fileUpload.click()">
+                        <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                    <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+                    <div><a *ngIf="getFile()" [href]="getFile()?.url">{{getFile()?.filename}}</a>
+                        <p *ngIf="!getFile()">No file uploaded yet.</p>
+                    </div>
+                    <div class="progress">
+
+                        <mat-progress-bar class="progress-bar" mode="determinate"
+                                          [value]="uploadProgress" *ngIf="uploadProgress">
+
+                        </mat-progress-bar>
+
+                        <mat-icon class="cancel-upload" (click)="cancelUpload()"
+                                  *ngIf="uploadProgress">delete_forever</mat-icon>
+
+                      </div>
+                </div>
+                <button mat-stroked-button *ngIf="!data?.completed" (click)="toggleCompletion()">Not Done</button>
+                <button mat-flat-button color="primary" *ngIf="data?.completed"
+                    (click)="toggleCompletion()">Done</button>
+            </div>
+        </div>
+    </div>
+    <div class="post-todo">
+        <button color="primary" mat-mini-fab class="button" (click)="deleteTodo()">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </div>
+</div>
